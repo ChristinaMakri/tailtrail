@@ -29,7 +29,7 @@ export function WelcomeScreen({ navigation }: Props) {
           </View>
           <Text style={styles.appName}>TailTrail</Text>
           <Text style={styles.tagline}>
-            Βοηθάμε τα ζώα{'\n'}να βρουν το δρόμο τους σπίτι
+            Ανέβασε φωτογραφία και{'\n'}η AI θα βρει το ζωάκι σου
           </Text>
         </SafeAreaView>
       </LinearGradient>
