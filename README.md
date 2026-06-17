@@ -4,6 +4,16 @@
 
 Open source mobile application that uses AI photo matching to help reunite lost pets with their owners.
 
+## Screenshots
+
+<p align="center">
+  <img src="app/assets/screenshots/01_welcome.png" width="18%" alt="Welcome" />
+  <img src="app/assets/screenshots/02_home.png" width="18%" alt="Home Feed" />
+  <img src="app/assets/screenshots/03_report_choice.png" width="18%" alt="New Report" />
+  <img src="app/assets/screenshots/04_matches.png" width="18%" alt="AI Matches" />
+  <img src="app/assets/screenshots/05_profile.png" width="18%" alt="Profile" />
+</p>
+
 ## Features
 
 - 📸 Upload a photo of a found animal → AI matches against lost pet reports
