@@ -124,6 +124,32 @@ tailtrail/
         └── moderate-image/        # Αυτόματο content moderation
 ```
 
-## Άδεια χρήσης
+## Roadmap
 
-MIT — ελεύθερο για χρήση, τροποποίηση και διανομή.
+### AI & Matching
+- [ ] **Fine-tuned pet re-identification model** — replace CLIP with a domain-specific model (e.g. OSNet) trained on pet images for significantly better accuracy, especially across lighting conditions and angles
+- [ ] **Multi-signal scoring** — combine visual embedding similarity with structured metadata (species, breed, colour, size) as a secondary signal to reduce false positives
+
+### UX & Onboarding
+- [ ] **Guided onboarding** — 2–3 slide walkthrough for new users explaining the AI matching flow
+- [ ] **Deep links from push notifications** — tap a match notification and land directly on the match card, not the home feed
+- [ ] **Map view** — optional map showing approximate locations of nearby reports
+
+### Trust & Safety
+- [ ] **Verified reunions** — let users confirm a successful match; show reunion count on the home screen to build community trust
+- [ ] **Location blur** — replace approximate area text with a hexagon-grid overlay on a map so the general zone is visible without revealing the exact street
+- [ ] **Breed / colour auto-detection** — pre-fill the report form using the uploaded photo so users don't have to type manually
+
+### Technical
+- [ ] **Async embedding pipeline** — move CLIP inference to a background queue so the user doesn't wait on HuggingFace API latency after uploading
+- [ ] **Embedding cache** — skip re-computation when the same image is re-uploaded
+- [ ] **Rate limiting** on Edge Functions to prevent abuse
+- [ ] **Expo EAS Build** — set up cloud builds for distributing test builds via TestFlight / Google Play Internal Testing
+
+### Discovery
+- [ ] **Landing page** — simple web page so people can find the app without knowing GitHub
+- [ ] **iOS & Android store listings** — publish to App Store and Google Play
+
+## License
+
+MIT — free to use, modify, and distribute.
