@@ -1,41 +1,41 @@
 # TailTrail 🐾
 
-**Δωρεάν, ανοιχτού κώδικα εφαρμογή εύρεσης χαμένων ζώων συντροφιάς στην Ελλάδα**
+**Free, open-source lost pet finder app for Greece**
 
-Ανέβασε φωτογραφία και η AI θα βρει το ζωάκι σου — χωρίς χρέωση, χωρίς διαφημίσεις.
+Upload a photo and AI will find your pet — no fees, no ads.
 
 <p align="center">
-  <img src="app/assets/screenshots/01_welcome.png" width="18%" alt="Αρχική" />
+  <img src="app/assets/screenshots/01_welcome.png" width="18%" alt="Welcome" />
   <img src="app/assets/screenshots/02_home.png" width="18%" alt="Feed" />
-  <img src="app/assets/screenshots/03_report_choice.png" width="18%" alt="Νέα αγγελία" />
-  <img src="app/assets/screenshots/04_matches.png" width="18%" alt="AI Ταιριάσματα" />
-  <img src="app/assets/screenshots/05_profile.png" width="18%" alt="Προφίλ" />
+  <img src="app/assets/screenshots/03_report_choice.png" width="18%" alt="New report" />
+  <img src="app/assets/screenshots/04_matches.png" width="18%" alt="AI Matches" />
+  <img src="app/assets/screenshots/05_profile.png" width="18%" alt="Profile" />
 </p>
 
 ---
 
-## Πώς λειτουργεί
+## How it works
 
-1. **Έχασες ζωάκι;** Ανέβασε φωτογραφία → η AI αναζητά αντιστοιχίσεις με βρεθέντα ζώα στην περιοχή σου
-2. **Βρήκες ζωάκι;** Ανέβασε φωτογραφία → η AI ψάχνει μεταξύ χαμένων ζώων κοντά σου
-3. **Λαμβάνεις ειδοποίηση** όταν βρεθεί πιθανό ταίριασμα — εσύ επιβεβαιώνεις
+1. **Lost a pet?** Upload a photo → AI searches for matches among found animals in your area
+2. **Found a pet?** Upload a photo → AI searches among lost pets nearby
+3. **Get notified** when a potential match is found — you confirm it
 
-Το σύστημα χρησιμοποιεί το μοντέλο **CLIP** για οπτική ομοιότητα φωτογραφιών και **PostGIS** για γεωγραφική αναζήτηση εντός ρυθμιζόμενης ακτίνας (10 / 30 / 50 / 100 χλμ).
+The system uses the **CLIP** model for visual photo similarity and **PostGIS** for geographic search within a configurable radius (10 / 30 / 50 / 100 km).
 
-## Χαρακτηριστικά
+## Features
 
-- **AI photo matching** — CLIP visual embeddings, χωρίς ανάγκη για περιγραφή κειμένου
-- **Γεωγραφική αναζήτηση** — ρυθμιζόμενη ακτίνα, προεπιλογή 30 χλμ
-- **Προστασία τοποθεσίας** — εμφανίζεται μόνο κατά προσέγγιση περιοχή, όχι ακριβής διεύθυνση
-- **Αυτόματο moderation** φωτογραφιών + κουμπί αναφοράς
-- **Push notifications** για κάθε νέο ταίριασμα
-- **Σύνδεση με Google / Apple**
-- **GDPR compliant** — αυτόματη διαγραφή δεδομένων 7 ημέρες μετά το κλείσιμο αγγελίας
-- **100% δωρεάν** για χρήστες και για hosting (Supabase free tier + HuggingFace free API)
+- **AI photo matching** — CLIP visual embeddings, no text description needed
+- **Geographic search** — configurable radius, default 30 km
+- **Location privacy** — only an approximate area is shown, not an exact address
+- **Automatic photo moderation** + report button
+- **Push notifications** for every new match
+- **Sign in with Google / Apple**
+- **GDPR compliant** — data is automatically deleted 7 days after a listing is closed
+- **100% free** for users and for hosting (Supabase free tier + HuggingFace free API)
 
 ## Tech Stack
 
-| Layer | Τεχνολογία |
+| Layer | Technology |
 |---|---|
 | Mobile | React Native + Expo SDK 56 (TypeScript) |
 | Backend | Supabase (PostgreSQL + pgvector + PostGIS) |
@@ -45,15 +45,15 @@
 | Serverless | Supabase Edge Functions (Deno) |
 | Notifications | Expo Push Notifications |
 
-## Ξεκινώντας
+## Getting Started
 
-### Προαπαιτούμενα
+### Prerequisites
 
 - Node.js 18+
-- Λογαριασμός [Supabase](https://supabase.com) (free tier)
-- Λογαριασμός [HuggingFace](https://huggingface.co) (free tier)
+- [Supabase](https://supabase.com) account (free tier)
+- [HuggingFace](https://huggingface.co) account (free tier)
 
-### 1. Clone & εγκατάσταση
+### 1. Clone & install
 
 ```bash
 git clone https://github.com/ChristinaMakri/tailtrail.git
@@ -61,13 +61,13 @@ cd tailtrail/app
 npm install
 ```
 
-### 2. Supabase — βάση δεδομένων
+### 2. Supabase — database
 
-1. Δημιούργησε νέο project στο [supabase.com](https://supabase.com)
-2. Στο **SQL Editor** τρέξε διαδοχικά:
+1. Create a new project at [supabase.com](https://supabase.com)
+2. In the **SQL Editor**, run the following in order:
    - `supabase/migrations/001_initial.sql`
    - `supabase/migrations/002_find_similar_pets.sql`
-3. Ενεργοποίησε **Google** και **Apple** OAuth στο Authentication → Providers
+3. Enable **Google** and **Apple** OAuth under Authentication → Providers
 
 ### 3. Supabase — Edge Functions
 
@@ -76,9 +76,9 @@ supabase functions deploy generate-embedding find-matches moderate-image
 supabase secrets set HUGGINGFACE_TOKEN=hf_xxxxxxxxxxxxxxxx
 ```
 
-### 4. Ρύθμιση
+### 4. Configuration
 
-Στο `app/app.json` → `extra` βάλε το Supabase URL και το anon key του project σου:
+In `app/app.json` → `extra`, set your Supabase project URL and anon key:
 
 ```json
 "extra": {
@@ -87,16 +87,16 @@ supabase secrets set HUGGINGFACE_TOKEN=hf_xxxxxxxxxxxxxxxx
 }
 ```
 
-### 5. Εκτέλεση
+### 5. Run
 
 ```bash
 cd app
 npm start
 ```
 
-Σάρωσε το QR code με το [Expo Go](https://expo.dev/go) (Android / iOS).
+Scan the QR code with [Expo Go](https://expo.dev/go) (Android / iOS).
 
-## Δομή project
+## Project Structure
 
 ```
 tailtrail/
@@ -104,11 +104,11 @@ tailtrail/
 │   ├── src/
 │   │   ├── screens/
 │   │   │   ├── auth/             # Welcome, Login, Register
-│   │   │   ├── home/             # Feed + λεπτομέρεια αγγελίας
-│   │   │   ├── report/           # Νέα αγγελία (χάθηκε / βρέθηκε)
-│   │   │   ├── matches/          # AI ταιριάσματα
-│   │   │   └── profile/          # Προφίλ + αγγελίες μου
-│   │   ├── components/           # Επαναχρησιμοποιούμενα UI components
+│   │   │   ├── home/             # Feed + listing detail
+│   │   │   ├── report/           # New report (lost / found)
+│   │   │   ├── matches/          # AI matches
+│   │   │   └── profile/          # Profile + my listings
+│   │   ├── components/           # Reusable UI components
 │   │   ├── navigation/           # React Navigation (stack + tabs)
 │   │   ├── hooks/                # useAuth, usePets, useMatches
 │   │   ├── lib/                  # Supabase client + design system
@@ -116,12 +116,12 @@ tailtrail/
 │   └── App.tsx
 └── supabase/
     ├── migrations/
-    │   ├── 001_initial.sql        # Πίνακες, RLS, triggers
+    │   ├── 001_initial.sql        # Tables, RLS, triggers
     │   └── 002_find_similar_pets.sql  # pgvector similarity function
     └── functions/
         ├── generate-embedding/    # CLIP embedding via HuggingFace
-        ├── find-matches/          # Vector + PostGIS αναζήτηση
-        └── moderate-image/        # Αυτόματο content moderation
+        ├── find-matches/          # Vector + PostGIS search
+        └── moderate-image/        # Automatic content moderation
 ```
 
 ## Roadmap
